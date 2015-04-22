@@ -33,21 +33,21 @@ class Customer
     result 
   end
 
-  def amount_for(element)
-    this_amount = 0 
+  def amount_for(rental)
+    ret = 0 
 
-    case element.movie.price_code
+    case rental.movie.price_code
     when Movie::REGULAR
-      this_amount += 2
-      this_amount += (element.days_rented - 2) * 1.5 if element.days_rented > 2
+      ret += 2
+      ret += (rental.days_rented - 2) * 1.5 if rental.days_rented > 2
     when Movie::NEW_RELEASE
-      this_amount += element.days_rented * 3
+      ret += rental.days_rented * 3
     when Movie::CHILDRENS
-      this_amount += 1.5
-      this_amount += (element.days_rented - 3) * 1.5 if element.days_rented > 3
-      this_amount = this_amount.to_i if this_amount == this_amount.to_i
+      ret += 1.5
+      ret += (rental.days_rented - 3) * 1.5 if rental.days_rented > 3
+      ret =ret.to_i if ret == ret.to_i
     end
 
-    this_amount
+    ret 
   end
 end
