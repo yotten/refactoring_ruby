@@ -9,4 +9,21 @@ class Movie
   def initialize(title, price_code)
     @title, @price_code = title, price_code 
   end 
+
+  def charge(days_rented)
+    ret = 0
+    case @price_code
+    when REGULAR
+      ret += 2
+      ret += (days_rented - 2) * 1.5 if days_rented > 2      
+    when NEW_RELEASE
+      ret += days_rented * 3
+    when CHILDRENS
+      ret += 1.5
+      ret += (days_rented - 3) * 1.5 if days_rented > 3
+      ret =ret.to_i if ret == ret.to_i  
+    end
+
+    ret
+  end 
 end
